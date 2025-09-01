@@ -1,0 +1,15 @@
+import 'database_helper.dart';
+import '../usuario.dart';
+
+
+class UsuarioDAO{
+static Future<bool> autenticar(String login, String senha) async {
+  final db = await DatabaseHelper.getDatabase();
+
+  final resultado = await db.query(
+    'tb_usuario',
+    where: 'nm_login = ? and ds_senha = ?',
+  );
+    return resultado.isNotEmpty;
+  }
+}
