@@ -54,9 +54,7 @@ final TextEditingController usuarioController= TextEditingController();
                      SnackBar(content: Text("Usuário ou senha inválidos!!"))
                    );
                 }
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Usuário: ${usuarioController.text} Senha: ${senhaController.text}"))
-                );
+
               }, child: const Text('logar'))
             ],
           ),
