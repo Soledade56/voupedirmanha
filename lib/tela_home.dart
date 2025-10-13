@@ -32,9 +32,13 @@ Future<void> carregaRestaurantes()async{
       appBar: AppBar(
           title: const Text("Lista de Restaurantes"),
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadRestaurante()));
-          }, icon: Icon(Icons.add))
+          IconButton(
+              onPressed: (){
+                var t = Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadRestaurante()));
+                if(t == true || t == null){
+                  }
+                },
+              icon: Icon(Icons.add))
         ],
       ),
       body: Padding(padding: const EdgeInsets.all(10),
