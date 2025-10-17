@@ -56,7 +56,7 @@ Future<void> carregaRestaurantes()async{
                     children: [
                      IconButton(
                       onPressed: (){
-                        //Codigo para Editar Restaurante
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadRestaurante()));
                   },
                         icon: Icon(Icons.edit, color: Colors.blue)
                     ),
