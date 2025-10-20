@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soledade/banco/restaurante_dao.dart';
-import 'package:soledade/banco/tipo_DAO.dart';
-import 'package:soledade/tipo.dart';
+import './banco/tipo_DAO.dart';
+import './tipo.dart';
 
 class TelaCadRestaurante extends StatefulWidget {
   TelaCadRestaurante({super.key});
@@ -29,7 +29,7 @@ class TelaCadRestauranteState extends State<TelaCadRestaurante>{
   }
 
   Future<void> carregarTipos() async{
-    final lista = await tipo_DAO.listarTipos();
+    final lista = await TipoDAO.listarTipos();
     setState(() {
       tiposCulinaria = lista;
     });
@@ -50,15 +50,15 @@ class TelaCadRestauranteState extends State<TelaCadRestaurante>{
                   value: culinariaSelecionada,
                   items: tiposCulinaria.map((tipo){
                     return DropdownMenuItem<String>(
-                      value: tipo.nome,
-                      child: Text("${tipo.nome}"),
+                      value: tipo.descricao,
+                      child: Text("${tipo.descricao}"),
                     );
                   }).toList(),
                onChanged: (String? novaCulinaria) {
                     setState(() {
                       culinariaSelecionada = novaCulinaria;
                       Tipo tipoSelecionado = tiposCulinaria.firstWhere(
-                          (tipo) => tipo.nome == novaCulinaria,
+                          (tipo) => tipo.descricao == novaCulinaria,
                       );
                       tipoCulinaria = tipoSelecionado.codigo;
                     });
