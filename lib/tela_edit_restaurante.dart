@@ -32,8 +32,8 @@ class TelaEditRestauranteState extends State<TelaEditRestaurante>{
     nomeController.text = TelaEditRestaurante.restaurante.nome!;
     latitudeController.text = TelaEditRestaurante.restaurante.latitude.toString()!;
     longitudeController.text = TelaEditRestaurante.restaurante.longitude.toString()!;
-    tipoCulinaria = TelaEditRestaurante().restaurante.culinaria?.codigo;
-    culinariaSelecionada = TelaEditRestaurante.restaurante.culinaria?.descricao!;
+    tipoCulinaria = TelaEditRestaurante.restaurante.cutinaria?.codigo;
+    culinariaSelecionada = TelaEditRestaurante.restaurante.cutinaria?.descricao!;
   }
 
   Future<void> carregarTipos() async{
@@ -53,7 +53,7 @@ class TelaEditRestauranteState extends State<TelaEditRestaurante>{
           children: [
             Text("Informações do Restaurante:"),
             SizedBox(height: 30),
-            Text('CODIGO')
+            Text('CODIGO'),
             TextFormField(
               decoration: const InputDecoration(hintText: 'Codigo'),
               controller: cdController,
