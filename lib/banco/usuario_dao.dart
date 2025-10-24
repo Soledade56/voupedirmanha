@@ -18,4 +18,24 @@ static Future<bool> autenticar(String login, String senha) async {
     return resultado.isNotEmpty;
 
   }
+
+  static Future<int> cadastrarUsuario (
+      String? nome,
+      String? login,
+      String? senha,
+      ) async {
+    final db = await DatabaseHelper.getDatabase();
+    final dadosUsuario = {
+      'nm_usuario': nome,
+      'nm_login': login,
+      'ds_senha': senha,
+    };
+    try {
+      final  nm_Usuario= await db.insert('tb_Usuario', dadosUsuario);
+      return nm_Usuario;
+    } catch (e) {
+      print("Erro ao cadastrar usuario: $e");
+      return -1;
+    }
+  }
 }

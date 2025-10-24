@@ -5,6 +5,7 @@ import 'package:soledade/tela_home.dart';
 import 'tela_home.dart';
 import 'usuario.dart';
 import 'package:flutter/material.dart';
+import './tela_cad_usuario.dart';
 
 class TelaLogin extends StatelessWidget{
   TelaLogin({super.key});
@@ -55,7 +56,10 @@ final TextEditingController usuarioController= TextEditingController();
                    );
                 }
 
-              }, child: const Text('logar'))
+              }, child: const Text('logar')),
+              ElevatedButton(onPressed: ()=>{
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>TelaCadUsuario() ))
+              }, child: const Text("Cadastrar Usuario"))
             ],
           ),
         )

@@ -1,55 +1,84 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:soledade/banco/usuario_dao.dart';
 
 class TelaCadUsuario extends StatefulWidget {
+  TelaCadUsuario({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return StatefulWidget();
-    StatefulWidget;
-  }
-}
-  class TelaCadUsuario extends State<TelaCadUsuario>{
+    return TelaCadUsuarioState();
 
-  class _DemoForm extends State<DemoForm>{
-    final formkey = Globalkey<formState();
-    String nome = '';
-    String email = '';
-    String senha = '';
   }
-@override
-    Widget build(BuildContext context) {
-  return Scaffold(
-  appBar: AppBar(title: Text(widget.title)),
-  body: Form(
-  key: formKey,
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  child: ListView(
-  padding: const EdgeInsets.all(16),
-  children: [
-  TextFormField(
-  decoration: const InputDecoration(
-  prefixIcon: Icon(Icons.email),
-  labelText: 'E-Mail',
-  border: OutlineInputBorder()
 
-  ),
-  validator: (email) =>
-  email != null && !EmailValidator.validate(email)
-  ? 'E-Mail inválido'
-      : null,
-  onChanged: (email) {...},
-  ),
-  const SizedBox(height:16),
-  TextFormField(...), //TextFormField
-  const SizedBox(height: 16),
-  ElevatedButton(...) //ElevatedButton
-  ],
-  )
-  ),
-  );
-  }
 }
 
+class TelaCadUsuarioState extends State<TelaCadUsuario>{
 
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController loginController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+
+    return(
+        Scaffold(
+          appBar: AppBar(title: const Text('Cadastro de Usuario')),
+          body: Padding(padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Informações do Usuario"),
+                SizedBox(height: 30),
+                TextFormField(
+                  controller: nomeController,
+                  decoration: const InputDecoration(
+                      hintText: 'Nome do Usuario'),
+                  validator: (String? value) {
+                  },
+                ),
+                TextFormField(
+                  controller: loginController,
+                  decoration: const InputDecoration(
+                      hintText: 'Login do Usuario'),
+                  validator: (String? value) {
+                  },
+                ),
+            TextFormField(
+              controller: senhaController,  obscureText:  true,
+              decoration: const InputDecoration(
+                  hintText: 'Senha do Usuario'),
+              validator: (String? value) {
+              },
+            ),
+            ElevatedButton(
+                onPressed: ()async {
+                final sucesso = await UsuarioDAO.cadastrarUsuario(
+                    nomeController.text,
+                    loginController.text,
+                    senhaController.text,
+                );
+                String msg = 'ERRO: usuario não cadastrado';
+                Color corFundo = Colors.red;
+                if(sucesso> 0 ){
+                  //sucesso é o ID do restaurante cadastrado, que será maior que 0(zer0)
+                  msg = '"${nomeController.text}" cadastrado! ID: $sucesso';
+                  corFundo = Colors.green;
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(msg),
+                      backgroundColor: corFundo,
+                      duration:  Duration(seconds: 5),
+                    )
+                );
+
+            },
+                child: const Text("Cadastrar"))
+              ],
+            ),
+         )
+        )
+    );
+  }
+}
